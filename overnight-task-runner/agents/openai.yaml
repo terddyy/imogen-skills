@@ -1,0 +1,4 @@
+interface:
+  display_name: "Overnight Task Runner"
+  short_description: "Plan and run major tasks autonomously"
+  default_prompt: "Use $overnight-task-runner to turn this major task into an autonomous execution plan, complete it, verify it, and push it."
