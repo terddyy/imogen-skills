@@ -1,6 +1,6 @@
 # Imogen AI Consulting Skills
 
-19 Claude Code skills for working on client Django projects. You don't need to remember them: start with `ask-imogen`, describe what you're doing, and it picks the right skill (or chain of skills).
+19 agent skills for working on client Django projects. Works in Claude Code, Codex and Cursor. You don't need to remember them: start with `ask-imogen`, describe what you're doing, and it picks the right skill (or chain of skills).
 
 ## Install
 
@@ -18,11 +18,25 @@ Windows PowerShell:
 irm https://raw.githubusercontent.com/terddyy/imogen-skills/main/ai-consulting-1/install.ps1 | iex
 ```
 
-Skills go to `~/.claude/skills/`. Start a new Claude Code session after installing. To install into a single project instead, set `CLAUDE_SKILLS_DIR=.claude/skills` before running.
+The installer checks which of Claude Code, Codex and Cursor you have and installs where each one looks:
+
+| Tool | Folder |
+| --- | --- |
+| Claude Code | `~/.claude/skills/` |
+| Codex | `~/.agents/skills/` |
+| Cursor | reads both of the above; `~/.cursor/skills/` if you only have Cursor |
+
+Start a new session in your tool after installing.
+
+Options (set before running the command):
+- `IMOGEN_TOOLS=claude,codex,cursor`: choose the tools instead of auto-detecting.
+- `IMOGEN_SKILLS_DIR=.agents/skills`: install into one folder only, e.g. inside a single project (`.agents/skills` works for Codex and Cursor, `.claude/skills` for Claude Code and Cursor).
+
+If you have both Claude Code and Codex, Cursor may show each skill twice, because it reads both folders. The copies are the same, so it doesn't matter which one Cursor picks.
 
 ## Use
 
-Just say what you're doing in Claude Code:
+Just say what you're doing in your agent:
 
 > client wants invoices to be voidable
 > I need to build ABC-123
@@ -30,7 +44,7 @@ Just say what you're doing in Claude Code:
 > something broke after my last deploy
 > where do permissions live?
 
-Or call `/ask-imogen` directly, or any skill by name (`/perf-audit`, `/pr-description`, ...).
+Or call a skill by name: `/ask-imogen` in Claude Code and Cursor, `$ask-imogen` in Codex. The same works for any skill (`/perf-audit`, `$pr-description`, ...).
 
 ## The skills
 
@@ -79,4 +93,4 @@ Jira: `jira-tickets` and `perf-audit` can create tickets directly if you have th
 
 ## Uninstall
 
-Delete the 19 skill folders listed above from `~/.claude/skills/`.
+Delete the 19 skill folders listed above from `~/.claude/skills/`, `~/.agents/skills/` and `~/.cursor/skills/` (whichever exist).
