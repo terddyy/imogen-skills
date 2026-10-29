@@ -4,21 +4,25 @@
 
 ## Install
 
-One command. Re-run the same command to update.
-
-macOS / Linux / Git Bash / WSL:
+One command, any OS (needs Node 18+). Re-run it to update.
 
 ```bash
+npx imogen-skills@latest
+```
+
+No Node? Use the shell installer instead (same result, same update-by-rerun):
+
+```bash
+# macOS / Linux / Git Bash / WSL
 curl -fsSL https://raw.githubusercontent.com/terddyy/imogen-skills/main/ai-consulting-1/install.sh | bash
 ```
 
-Windows PowerShell:
-
 ```powershell
+# Windows PowerShell
 irm https://raw.githubusercontent.com/terddyy/imogen-skills/main/ai-consulting-1/install.ps1 | iex
 ```
 
-The installer checks which of Claude Code, Codex and Cursor you have and installs where each one looks:
+Each installer checks which of Claude Code, Codex and Cursor you have and installs where each one looks:
 
 | Tool | Folder |
 | --- | --- |
@@ -28,9 +32,9 @@ The installer checks which of Claude Code, Codex and Cursor you have and install
 
 Start a new session in your tool after installing.
 
-Options (set before running the command):
-- `IMOGEN_TOOLS=claude,codex,cursor`: choose the tools instead of auto-detecting.
-- `IMOGEN_SKILLS_DIR=.agents/skills`: install into one folder only, e.g. inside a single project (`.agents/skills` works for Codex and Cursor, `.claude/skills` for Claude Code and Cursor).
+Options:
+- Choose the tools instead of auto-detecting: `npx imogen-skills@latest --tools codex,cursor` (shell installers: set `IMOGEN_TOOLS=codex,cursor`).
+- Install into one folder only, e.g. inside a single project: `npx imogen-skills@latest --dir .agents/skills` (shell installers: `IMOGEN_SKILLS_DIR`). `.agents/skills` works for Codex and Cursor, `.claude/skills` for Claude Code and Cursor.
 
 If you have both Claude Code and Codex, Cursor may show each skill twice, because it reads both folders. The copies are the same, so it doesn't matter which one Cursor picks.
 
@@ -94,3 +98,17 @@ Jira: `jira-tickets` and `perf-audit` can create tickets directly if you have th
 ## Uninstall
 
 Delete the 19 skill folders listed above from `~/.claude/skills/`, `~/.agents/skills/` and `~/.cursor/skills/` (whichever exist).
+
+## Releasing a new version (maintainers)
+
+The npm package bundles the skills, so `npx` users only get changes after a publish. After merging skill changes to main:
+
+```bash
+cd ai-consulting-1
+npm version patch --no-git-tag-version
+npm publish
+```
+
+Then commit the bumped `package.json`.
+
+The shell installers pull straight from GitHub main and don't need a publish.

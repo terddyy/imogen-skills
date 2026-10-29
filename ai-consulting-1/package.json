@@ -1,0 +1,28 @@
+{
+  "name": "imogen-skills",
+  "version": "1.0.0",
+  "description": "Imogen AI consulting skills for Django teams, installed into Claude Code, Codex and Cursor.",
+  "bin": {
+    "imogen-skills": "bin/install.js"
+  },
+  "files": [
+    "bin",
+    "*/**"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "claude-code",
+    "codex",
+    "cursor",
+    "agent-skills",
+    "django"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/terddyy/imogen-skills.git",
+    "directory": "ai-consulting-1"
+  },
+  "license": "UNLICENSED"
+}
