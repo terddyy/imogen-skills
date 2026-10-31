@@ -1,6 +1,6 @@
 # Imogen AI Consulting Skills
 
-19 agent skills for working on client Django projects. Works in Claude Code, Codex and Cursor. You don't need to remember them: start with `ask-imogen`, describe what you're doing, and it picks the right skill (or chain of skills).
+20 agent skills for working on client Django projects. Works in Claude Code, Codex and Cursor. You don't need to remember them: start with `ask-imogen`, describe what you're doing, and it picks the right skill (or chain of skills).
 
 ## Install
 
@@ -57,6 +57,7 @@ Or call a skill by name: `/ask-imogen` in Claude Code and Cursor, `$ask-imogen` 
 | Front door | `ask-imogen` | Routes you to the right skill or chain; answers "where/how" from the repo map |
 | Plan | `prd-writer` | Rough request → spec with acceptance criteria, edge cases, affected repos |
 | | `jira-tickets` | PRD → epics and tickets per repo with estimates, dependencies, blast radius |
+| | `jira-build` | Implements a Jira ticket: pulls description, comments and every image, reuses existing code, checks what it affects, compares screenshots to the mockups until they match |
 | | `impact-analysis` | Traces everything a change touches across all repos before work starts |
 | Know the system | `repo-map` | Living map of every repo, what it owns, how they connect |
 | | `onboarding` | Verified local setup per repo, conventions, first-week task |
@@ -79,7 +80,7 @@ Or call a skill by name: `/ask-imogen` in Claude Code and Cursor, `$ask-imogen` 
 | You say... | Route |
 | --- | --- |
 | "Client wants a new feature" | prd-writer → jira-tickets → impact-analysis |
-| "I need to build this ticket" | impact-analysis → django-feature → test-writer → pr-description |
+| "I need to build this ticket" / "build ABC-123" | jira-build → code-quality → pr-description |
 | "I need to change this model / endpoint" | impact-analysis → characterization-tests → safe-change → django-migrations |
 | "This touches the other repo" | impact-analysis → cross-repo-change → contract-tests |
 | "This page is slow" | perf-audit → query-optimizer → caching-strategy |
@@ -93,11 +94,11 @@ Or call a skill by name: `/ask-imogen` in Claude Code and Cursor, `$ask-imogen` 
 
 Run `repo-map` once from the folder that holds all the client's repos. Most of the other skills read from it, and `ask-imogen` answers "where does X live" from it instantly.
 
-Jira: `jira-tickets` and `perf-audit` can create tickets directly if you have the Atlassian MCP connected. Without it, they write a markdown file and a CSV you can import into Jira.
+Jira: `jira-tickets` and `perf-audit` can create tickets directly if you have the Atlassian MCP connected. Without it, they write a markdown file and a CSV you can import into Jira. `jira-build` reads tickets and downloads their images through the Atlassian MCP, or through the Jira REST API if `JIRA_URL`, `JIRA_EMAIL` and `JIRA_API_TOKEN` are set. Without either, it asks you to paste the ticket and images.
 
 ## Uninstall
 
-Delete the 19 skill folders listed above from `~/.claude/skills/`, `~/.agents/skills/` and `~/.cursor/skills/` (whichever exist).
+Delete the 20 skill folders listed above from `~/.claude/skills/`, `~/.agents/skills/` and `~/.cursor/skills/` (whichever exist).
 
 ## Releasing a new version (maintainers)
 

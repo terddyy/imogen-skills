@@ -68,3 +68,4 @@ Never create tickets without the dev confirming the list.
 - Every ticket has acceptance criteria and a repo. No exceptions.
 - Dependencies point both ways (blocks / blocked by) and match across tickets.
 - Blast radius is specific: name the consumer, the table size, the endpoint. "Might affect other things" isn't blast radius.
+- UI tickets attach or link the mockup for every screen and state they cover (Figma frame link preferred), and copy the exact UI text into the ticket. `jira-build` treats those images as the spec.

@@ -5,7 +5,7 @@ description: Front door for the Imogen dev kit. Use when a developer describes w
 
 # Ask Imogen
 
-The router. Devs don't need to remember 19 skill names. They say what they're doing; you work out the situation and point them at the right skill, or chain of skills, then start it.
+The router. Devs don't need to remember 20 skill names. They say what they're doing; you work out the situation and point them at the right skill, or chain of skills, then start it.
 
 ## Step 1: Figure out the situation
 
@@ -22,7 +22,7 @@ Useful signals to check quickly before routing:
 | Dev says something like... | Route |
 | --- | --- |
 | "Client wants a new feature" | `prd-writer` → `jira-tickets` → `impact-analysis` |
-| "I need to build this ticket" | `impact-analysis` → `django-feature` → `test-writer` → `pr-description` |
+| "I need to build this ticket" / a Jira key or link | `jira-build` → `code-quality` → `pr-description` |
 | "I need to change this model / endpoint" | `impact-analysis` → `characterization-tests` → `safe-change` → `django-migrations` |
 | "This touches the other repo" | `impact-analysis` → `cross-repo-change` → `contract-tests` |
 | "This page / endpoint is slow" | `perf-audit` → `query-optimizer` → `caching-strategy` |
@@ -41,6 +41,7 @@ Adjust the chain to the actual work, and say why you dropped a step:
 - Code is already well tested: drop `characterization-tests`.
 - Single repo and the repo map shows no consumers of what's changing: drop `cross-repo-change` and `contract-tests`.
 - Ticket only touches templates or config: `django-feature` is overkill; go straight to the change and `test-writer`.
+- Ticket has mockups or screenshots attached: always `jira-build`, even if it looks small. It's the only route that checks the UI against the images.
 
 Reply in this shape, short:
 
@@ -69,5 +70,5 @@ Good answers name the file and the pattern: "Permissions live in `core/permissio
 ## Rules
 
 - Recommend, then wait for a go-ahead before running a chain. Don't silently run five skills.
-- Never invent a skill name. The kit is: `ask-imogen`, `prd-writer`, `jira-tickets`, `impact-analysis`, `repo-map`, `onboarding`, `django-feature`, `safe-change`, `django-migrations`, `cross-repo-change`, `characterization-tests`, `contract-tests`, `test-writer`, `perf-audit`, `query-optimizer`, `caching-strategy`, `code-quality`, `pr-description`, `regression-postmortem`.
-- If the request is outside the kit (frontend styling, infra, etc.), say so and just help directly.
+- Never invent a skill name. The kit is: `ask-imogen`, `prd-writer`, `jira-tickets`, `jira-build`, `impact-analysis`, `repo-map`, `onboarding`, `django-feature`, `safe-change`, `django-migrations`, `cross-repo-change`, `characterization-tests`, `contract-tests`, `test-writer`, `perf-audit`, `query-optimizer`, `caching-strategy`, `code-quality`, `pr-description`, `regression-postmortem`.
+- If the request is outside the kit (infra, design work with no ticket behind it, etc.), say so and just help directly.

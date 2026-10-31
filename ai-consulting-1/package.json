@@ -1,6 +1,6 @@
 {
   "name": "imogen-skills",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Imogen AI consulting skills for Django teams, installed into Claude Code, Codex and Cursor.",
   "bin": {
     "imogen-skills": "bin/install.js"
