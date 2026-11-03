@@ -1,0 +1,27 @@
+{
+  "name": "imogen-skills",
+  "version": "2.0.0",
+  "description": "General Imogen dev skills for any tech stack, installed into Claude Code, Codex and Cursor.",
+  "bin": {
+    "imogen-skills": "bin/install.js"
+  },
+  "files": [
+    "bin",
+    "*/**",
+    "!prosol"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "claude-code",
+    "codex",
+    "cursor",
+    "agent-skills"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/terddyy/imogen-skills.git"
+  },
+  "license": "UNLICENSED"
+}
