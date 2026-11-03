@@ -36,9 +36,24 @@ Save images outside the repo (a temp or scratch folder), or in a folder listed i
 
 If there's a Figma link and a Figma MCP is connected, pull the frame's design context and screenshot. Exact values from Figma beat values estimated from a PNG.
 
+### Sort the images before using them
+
+Not every image is the design to build. Label each one, using the ticket text, filename, comment it was posted in, and what it shows:
+
+| Label | Looks like | How to use it |
+| --- | --- | --- |
+| **Target** | Clean design, Figma/Zeplin export, "should look like", "new design" | Spec it in Step 2 and match it in Step 7 |
+| **Current** | Screenshot of the live app, often on a bug ticket: "currently", "this is broken", browser chrome, real data | Shows what's wrong and where. Never copy it. Reproduce it before fixing, and confirm it's gone after |
+| **Annotated** | Screenshot with arrows, circles, boxes, sticky notes, strike-throughs, handwriting | List each mark as a separate requested change ("make this button blue", "remove this column"). The marks themselves are not part of the UI |
+| **Context** | Flow diagram, error message, console or network log, data sample, competitor reference | Read it for behavior and requirements. Not a pixel target |
+
+One image can be two things: a current screenshot with annotations is Current + Annotated. Its target is "the current screen with these changes applied", so spec the unmarked areas from the screenshot and the marked areas from the notes.
+
+Tell the dev how you labelled each image. If you can't tell whether an image is the target or the current state, ask. Building the bug back in is worse than asking.
+
 ## Step 2: Turn the mockups into a spec
 
-For each image, write a short spec. This is the checklist Step 7 compares against.
+For each **Target** image, and each **Current + Annotated** image, write a short spec. This is the checklist Step 7 compares against. Turn **Annotated** marks into a numbered list of changes; each one gets checked in Step 7 too.
 
 - **Viewport.** Image width tells you the design width. 2880 or 2560 wide usually means a 1440 or 1280 design at 2x. Divide every measurement by the scale.
 - **Regions, top to bottom.** Header, filters, table, card, footer: whatever the screen has.
@@ -126,6 +141,7 @@ This step is the point of the skill. Don't skip it, and don't report the UI as d
 5. Fix every difference, then re-screenshot. Repeat until nothing is left, or until the only differences are ones you can't fix (font not licensed locally, real data longer than the mockup's). Stop after 5 rounds and report what's left.
 6. If the project already has a visual-diff tool (Playwright `toHaveScreenshot`, pixelmatch, Percy, Chromatic), use it for an overlay diff too. Don't add one without asking.
 7. Check the other breakpoints: the ones with mockups must match; the ones without must not break.
+8. **Current** images: repeat the steps that produced the screenshot and confirm the problem is gone. **Annotated** images: go through the numbered changes from Step 2 one by one and screenshot each area.
 
 ## Step 8: Report
 
@@ -136,9 +152,10 @@ Acceptance criteria
 1. Admin can void a draft invoice: done (test_void_invoice_admin)
 2. Voided invoices show a grey "Void" badge: done (screenshot matched)
 
-UI vs mockups
-- invoice-detail.png ↔ invoice-detail.actual.png: matches
-- void-modal.png ↔ void-modal.actual.png: matches except body font falls back to Arial locally (Inter not installed)
+Images
+- invoice-detail.png (target) ↔ invoice-detail.actual.png: matches
+- void-modal.png (target) ↔ void-modal.actual.png: matches except body font falls back to Arial locally (Inter not installed)
+- list-bug.png (current + annotated): 3 marked changes, all done; overflow bug no longer reproduces
 
 Reused: PageHeader, Badge (+ "void" variant), ConfirmDialog, formatCurrency
 New: components/billing/InvoiceSummary.tsx
@@ -156,6 +173,7 @@ Then next steps: `code-quality` → `pr-description`. Put the mockup and screens
 ## Rules
 
 - No UI work without seeing the ticket's images. Stop and ask for them.
+- Label every image (target, current, annotated, context) before using it. Only targets are matched pixel for pixel; never copy a current-state screenshot.
 - The mockup wins over your taste. Don't "improve" the design, rename labels, or add elements that aren't in it. Raise suggestions as questions.
 - When the text, the images and the comments disagree, ask. Newer comments from the designer or PO override older content.
 - Reuse before you create, and never fork a component to tweak it.
