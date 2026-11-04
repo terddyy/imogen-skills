@@ -4,7 +4,13 @@
 
 ## Install
 
-One command, any OS. Re-run it to update.
+One command, any OS (needs Node 18+). Re-run it to update.
+
+```bash
+npx imogen-prosol@latest
+```
+
+No Node? Use the shell installer instead (same result, same update-by-rerun):
 
 ```bash
 # macOS / Linux / Git Bash / WSL
@@ -26,11 +32,9 @@ Each installer checks which of Claude Code, Codex and Cursor you have and instal
 
 Start a new session in your tool after installing.
 
-The npm package (`npx imogen-prosol@latest`) isn't published yet; use the commands above for now.
-
 Options:
-- Choose the tools instead of auto-detecting: set `IMOGEN_TOOLS=codex,cursor` (npm installer, once published: `--tools codex,cursor`).
-- Install into one folder only, e.g. inside a single project: set `IMOGEN_SKILLS_DIR=.agents/skills` (npm installer: `--dir`). `.agents/skills` works for Codex and Cursor, `.claude/skills` for Claude Code and Cursor.
+- Choose the tools instead of auto-detecting: `npx imogen-prosol@latest --tools codex,cursor` (shell installers: set `IMOGEN_TOOLS=codex,cursor`).
+- Install into one folder only, e.g. inside a single project: `npx imogen-prosol@latest --dir .agents/skills` (shell installers: `IMOGEN_SKILLS_DIR`). `.agents/skills` works for Codex and Cursor, `.claude/skills` for Claude Code and Cursor.
 
 If you have both Claude Code and Codex, Cursor may show each skill twice, because it reads both folders. The copies are the same, so it doesn't matter which one Cursor picks.
 
