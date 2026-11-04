@@ -13,7 +13,13 @@ Prosol devs install only the Prosol kit. The kits share no skill names, so if so
 
 ## Install
 
-One command, any OS. Re-run it to update.
+One command, any OS (needs Node 18+). Re-run it to update.
+
+```bash
+npx imogen-skills@latest
+```
+
+No Node? Use the shell installers (same result, same update-by-rerun):
 
 ```bash
 # macOS / Linux / Git Bash / WSL
@@ -25,9 +31,7 @@ curl -fsSL https://raw.githubusercontent.com/terddyy/imogen-skills/main/install.
 irm https://raw.githubusercontent.com/terddyy/imogen-skills/main/install.ps1 | iex
 ```
 
-Prosol devs use the Prosol installers instead: see [prosol/README.md](prosol/README.md).
-
-The npm packages (`npx imogen-skills@latest`, `npx imogen-prosol@latest`) aren't published yet. Until they are, `npx imogen-skills` still installs the old 1.x Django kit, so use the commands above.
+Prosol devs install `npx imogen-prosol@latest` instead: see [prosol/README.md](prosol/README.md).
 
 Each installer checks which of Claude Code, Codex and Cursor you have and installs where each one looks:
 
@@ -40,8 +44,8 @@ Each installer checks which of Claude Code, Codex and Cursor you have and instal
 Start a new session in your tool after installing.
 
 Options:
-- Choose the tools instead of auto-detecting: set `IMOGEN_TOOLS=codex,cursor` (npm installer, once published: `--tools codex,cursor`).
-- Install into one folder only, e.g. inside a single project: set `IMOGEN_SKILLS_DIR=.agents/skills` (npm installer: `--dir`).
+- Choose the tools instead of auto-detecting: `npx imogen-skills@latest --tools codex,cursor` (shell installers: set `IMOGEN_TOOLS=codex,cursor`).
+- Install into one folder only, e.g. inside a single project: `npx imogen-skills@latest --dir .agents/skills` (shell installers: `IMOGEN_SKILLS_DIR`).
 
 If you have both Claude Code and Codex, Cursor may show each skill twice, because it reads both folders. The copies are the same.
 
