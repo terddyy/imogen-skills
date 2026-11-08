@@ -75,7 +75,7 @@ Before writing anything, search the codebase for what already exists for each re
 - Logic: API client and hooks, formatters (dates, currency, numbers), validators, permission checks, constants and enums.
 - Backend: services, selectors, serializers, querysets that already do part of the job.
 
-Search by name and by what it does (`grep` for the component name, the CSS class, the endpoint path, the formatter). Open the closest existing screen to the mockup and copy how it's put together.
+Search by name and by what it does (`grep` for the component name, the CSS class, the endpoint path, the formatter). Open the closest existing screen to the mockup and copy how it's put together. Treat it as the guide for structure only, because older folders can lag behind the team's current conventions. For text and styling, follow the newest shared components and the theme, and add a row for each to the reuse table.
 
 Write a reuse table:
 
@@ -86,13 +86,18 @@ Status pill            components/Badge.tsx           add "void" variant
 Amount column          utils/formatCurrency.ts        reuse
 Void confirm modal     components/ConfirmDialog.tsx   reuse, new copy
 Invoice summary card   (none)                         new: components/billing/InvoiceSummary.tsx
+Text                   Typography + theme variants    reuse
+Styling                Tailwind classes               no new CSS files
 ```
 
 Rules:
 - Reuse first, extend second (new prop or variant), create last.
 - Never copy-paste a component to tweak it. Extend it, or pull the shared part out.
 - A new piece that's likely to be reused goes where the project keeps shared components, named like its neighbours.
-- Follow the project's styling system (Tailwind classes, CSS modules, styled-components, whatever it uses). No inline styles, no hard-coded colors where a token exists.
+- Use the project's current styling system and text component. Work them out from the newest shared components and the theme, with `git grep` counts if the code is mixed. The nearest old screen is not the reference.
+- In a Tailwind project, mockup-exact values go in Tailwind classes, using arbitrary values and variants when needed. Don't add a new `.css`, `.scss` or CSS-module file unless Tailwind can't express it and the dev agrees.
+- If the project has a text component (MUI `Typography` or similar), use it and its theme variants for text instead of raw `<p>`, `<span>` or `<h*>`.
+- No inline styles, no hard-coded colors where a token exists.
 - Logic stays out of UI components, the same way the codebase already does it (hooks, services, selectors).
 
 ## Step 4: Check what it affects
