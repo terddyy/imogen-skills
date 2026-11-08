@@ -1,6 +1,6 @@
 ---
 name: prosol-code-quality
-description: Review a Django branch before the PR — house style, hidden coupling (signals, fat models, business logic in serializers/views), test gaps, and Django/DRF security checks (permissions, tenant scoping, mass assignment, raw SQL, unsafe settings). Use when "ready to open a PR", "review my changes", "check this before I push", or as a reviewer on someone else's branch.
+description: Review a Django branch before the PR — house style, hidden coupling (signals, fat models, business logic in serializers/views), test gaps, Django/DRF security checks (permissions, tenant scoping, mass assignment, raw SQL, unsafe settings), and frontend conventions when the diff touches UI. Use when "ready to open a PR", "review my changes", "check this before I push", or as a reviewer on someone else's branch.
 ---
 
 # Code Quality
@@ -29,7 +29,7 @@ pytest <changed apps>
 
 Report tool failures first.
 
-## Step 3: Review in three passes
+## Step 3: Review in passes
 
 Keep the passes separate in the report.
 
@@ -61,6 +61,15 @@ Keep the passes separate in the report.
 - Tests assert behavior, not implementation (no mocking the code under test).
 - Migrations reviewed per `prosol-django-migrations` if any.
 
+**Pass 4: Frontend conventions (only when the diff touches UI)**
+
+Work out the current convention from the newest shared components and the theme, not the nearest old screen. Use counts when the code is mixed, e.g. `git grep -l '<Typography' origin/<base> -- src`. If no document states the rule, say what the evidence was.
+- New `.css`, `.scss` or CSS-module file in a Tailwind project: move it to Tailwind classes unless Tailwind can't express it.
+- Raw `<p>`, `<span>` or `<h*>` for text where the project has a text component such as MUI `Typography`.
+- Inline styles, or hard-coded colors and sizes where a token or theme variant exists.
+- A hand-built button, input, modal or similar where a shared component exists.
+- For a restyle, compare computed layout before and after at every breakpoint the CSS covers, not only desktop.
+
 ## Step 4: Report, then fix
 
 ```
@@ -70,6 +79,8 @@ Design
   [Should fix] billing/signals.py:12 post_save sends the void email; move to services.void_invoice() inside on_commit.
 Tests
   [Should fix] no test for member role → add test_member_cannot_void.
+Frontend
+  [Should fix] pages/Billing.module.css new CSS module in a Tailwind project → move to Tailwind classes in Billing.tsx.
 Nits
   [Optional] ...
 ```
