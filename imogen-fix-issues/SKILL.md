@@ -58,6 +58,7 @@ Report both sets of findings clearly (don't merge/rerank them), fix anything rea
 
 ## Step 3 — Commit and open the PR
 
+- Implementation screenshots, recordings and QA or validation notes never go in git. Capture outside the repo, stage by explicit path, check `git diff --cached --name-status`, and delete captures you made before committing. To share one, give the dev its outside-repo path to upload to the PR or ticket.
 - Commit the work to a branch, with a message that references the issue (`Fixes #<n>` / `Closes #<n>`).
 - Push and open a PR against the repo's default branch, linking the issue in the description so it closes automatically on merge.
 - Do not close or edit the original issue directly — let the PR merge do that.

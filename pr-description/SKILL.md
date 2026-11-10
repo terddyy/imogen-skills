@@ -47,7 +47,8 @@ Tested: new tests in `invoices.void.test.ts` (admin ok, member 403, other org 40
 - Blast radius, migration, and deploy order only when there is something real to say. Drop them otherwise.
 - Testing says what was actually run. Never claim a test or manual check that did not happen.
 - Point at the part that needs a close look ("the permission check in `routes/invoices.ts:58` is the important bit").
-- Add a screenshot or an example request/response for UI or API changes when it helps.
+- Add an example request/response for UI or API changes when it helps. Reference only images the dev uploaded to the PR or ticket.
+- Implementation screenshots, recordings and QA or validation notes never go in git. Capture outside the repo, stage by explicit path, check `git diff --cached --name-status`, and delete captures you made before committing. To share one, give the dev its outside-repo path to upload to the PR or ticket.
 - No headings, bold labels, emoji, or "Summary / Changes / Testing" template on a small PR. No filler like "This PR aims to". No restating the diff line by line. No AI or generated-by mentions, no co-author lines.
 
 ## Step 3: Open it (only if asked)

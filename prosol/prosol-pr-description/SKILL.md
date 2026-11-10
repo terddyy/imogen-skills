@@ -57,7 +57,8 @@ Rules for the content:
 - Testing says what was actually run. Don't claim tests or manual checks that didn't happen.
 - Call out anything the reviewer should look at closely ("the permission check in views.py:58 is the important bit").
 - Write like a teammate, not a template. No filler, no emoji, no restating the diff line by line.
-- Screenshots or example request/response for UI or API changes when they help.
+- Example request/response for UI or API changes when they help. Reference only images the dev uploaded to the PR or ticket.
+- Implementation screenshots, recordings and QA or validation notes never go in git. Capture outside the repo, stage by explicit path, check `git diff --cached --name-status`, and delete captures you made before committing. To share one, give the dev its outside-repo path to upload to the PR or ticket.
 
 ## Step 3: Open it (only if asked)
 

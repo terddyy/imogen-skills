@@ -83,7 +83,7 @@ Briefly: the ticket in 1-2 lines plus any overriding comment, the image labels, 
 2. Set the viewport to the design width and screenshot with what's available: a Playwright or Chrome DevTools MCP, Claude in Chrome, or the project's Playwright (`npx playwright screenshot --viewport-size=1440,900 <url> out.png`). Save it next to the mockup as `<name>.actual.png`.
 3. Compare region by region against the spec: layout and order, sizes and spacing, typography, colors, borders, radius, shadows, icons, copy character for character. Trigger each state shown (hover, modal open, empty, error) and screenshot it. Check numbers with computed styles (`getComputedStyle`, DevTools), not by eye.
 4. Fix every difference and re-screenshot. Stop when nothing is left but what you can't fix (font not available locally, longer real data), or after 5 rounds, and report what's left.
-5. If the project already has visual diffing (Playwright `toHaveScreenshot`, Percy, Chromatic), run it too. Don't add one without asking.
+5. If the project already has visual diffing (Playwright `toHaveScreenshot`, Percy, Chromatic), run it too. Don't add one without asking. If a run writes new baseline images, delete them before committing unless the dev asked for them, and then the dev commits them by hand.
 6. Breakpoints with mockups must match; the rest must not break. Current images: repeat the original steps and confirm the problem is gone. Annotated: check each numbered change and screenshot its area.
 
 ## Step 8: Report
@@ -98,7 +98,7 @@ Affects: Badge on 6 pages, variant is opt-in; Invoices and Payments checked
 Open: empty state not in mockups, used existing EmptyState, needs design sign-off
 ```
 
-Next: `verify-done`, then `code-quality` and `pr-description`. Put the mockup/screenshot pairs in the PR.
+Next: `verify-done`, then `code-quality` and `pr-description`. Don't commit the mockup or screenshot images. Give the dev their outside-repo paths to upload to the PR or ticket.
 
 ## Rules
 
@@ -108,3 +108,4 @@ Next: `verify-done`, then `code-quality` and `pr-description`. Put the mockup/sc
 - Never fork a component to tweak it, and never change a shared component's default look for one ticket.
 - Never report UI as done without a screenshot comparison at the mockup's width.
 - Don't commit downloaded attachments. Never print or commit Jira credentials.
+- Implementation screenshots, recordings and QA or validation notes never go in git. Capture outside the repo, stage by explicit path, check `git diff --cached --name-status`, and delete captures you made before committing. To share one, give the dev its outside-repo path to upload to the PR or ticket.

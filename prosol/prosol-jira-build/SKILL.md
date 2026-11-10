@@ -144,7 +144,7 @@ This step is the point of the skill. Don't skip it, and don't report the UI as d
    - states: trigger each one shown in the mockups (hover, open modal, empty, error) and screenshot it
 4. Don't trust your eyes on numbers. Read the computed styles from the browser (`getComputedStyle` on the element, or the DevTools style panel) and check them against the spec values.
 5. Fix every difference, then re-screenshot. Repeat until nothing is left, or until the only differences are ones you can't fix (font not licensed locally, real data longer than the mockup's). Stop after 5 rounds and report what's left.
-6. If the project already has a visual-diff tool (Playwright `toHaveScreenshot`, pixelmatch, Percy, Chromatic), use it for an overlay diff too. Don't add one without asking.
+6. If the project already has a visual-diff tool (Playwright `toHaveScreenshot`, pixelmatch, Percy, Chromatic), use it for an overlay diff too. Don't add one without asking. If a run writes new baseline images, delete them before committing unless the dev asked for them, and then the dev commits them by hand.
 7. Check the other breakpoints: the ones with mockups must match; the ones without must not break.
 8. **Current** images: repeat the steps that produced the screenshot and confirm the problem is gone. **Annotated** images: go through the numbered changes from Step 2 one by one and screenshot each area.
 
@@ -173,7 +173,7 @@ Open questions / follow-ups
 - Empty state for the void history list isn't in the mockups: used the existing EmptyState component, needs design sign-off
 ```
 
-Then next steps: `prosol-code-quality` → `prosol-pr-description`. Put the mockup and screenshot pairs in the PR so the reviewer can compare without opening Jira.
+Then next steps: `prosol-code-quality` → `prosol-pr-description`. Don't commit the mockup or screenshot images. Give the dev their outside-repo paths to upload to the PR so the reviewer can compare without opening Jira.
 
 ## Rules
 
@@ -186,3 +186,4 @@ Then next steps: `prosol-code-quality` → `prosol-pr-description`. Put the mock
 - Don't change the default look of a shared component to satisfy one ticket. Add a variant.
 - Never report UI as done without a screenshot comparison at the mockup's width.
 - Don't commit downloaded Jira attachments, and never print or commit Jira credentials.
+- Implementation screenshots, recordings and QA or validation notes never go in git. Capture outside the repo, stage by explicit path, check `git diff --cached --name-status`, and delete captures you made before committing. To share one, give the dev its outside-repo path to upload to the PR or ticket.

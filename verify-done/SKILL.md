@@ -61,6 +61,7 @@ Each line is a criterion with the command and the relevant output. Anything not 
 ## Rules
 
 - Never say "done", "fixed", or "works" without the evidence above. Never write "should work".
+- Implementation screenshots, recordings and QA or validation notes never go in git. Capture outside the repo, stage by explicit path, check `git diff --cached --name-status`, and delete captures you made before committing. To share one, give the dev its outside-repo path to upload to the PR or ticket.
 - Never claim a check you did not run, and never paraphrase a failure as a pass.
 - Do not disable a lint rule, skip a test, or loosen a type to get green. Fix it or report it.
 - If you cannot run something (no DB, no credentials), say so and say who can.

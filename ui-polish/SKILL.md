@@ -16,7 +16,7 @@ Find the UI framework (React, Vue, Svelte, Angular, server templates, Flutter) a
 ## Step 1: Look before touching
 
 1. Start the app with the repo's dev command (README, `package.json` scripts, Makefile). Log in as a user with realistic data.
-2. Screenshot the target at 375px, 768px and 1280px+ wide (browser tools, Playwright `page.screenshot`, or DevTools device mode). Save them as the "before".
+2. Screenshot the target at 375px, 768px and 1280px+ wide (browser tools, Playwright `page.screenshot`, or DevTools device mode). Save them outside the repo as the "before".
 3. Also capture the states: empty (no data), loading (throttle the network), error (block the API call), long content (long names, 200 rows, long translations).
 
 ## Step 2: List the issues
@@ -59,6 +59,7 @@ Left alone: header nav spacing (shared layout, needs its own ticket)
 - Polish, not redesign. If the fix needs a new visual direction, stop and ask.
 - No inline styles and no one-off values when a token exists.
 - Never claim it looks right without a screenshot at mobile and desktop width.
+- Implementation screenshots, recordings and QA or validation notes never go in git. Capture outside the repo, stage by explicit path, check `git diff --cached --name-status`, and delete captures you made before committing. To share one, give the dev its outside-repo path to upload to the PR or ticket.
 - Don't touch shared layout components for one screen's problem without checking every screen that uses them.
 
 Next: `accessibility-audit` for a full WCAG pass, `e2e-tests` or `verify-done` before the PR.
